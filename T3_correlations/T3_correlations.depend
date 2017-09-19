@@ -1,0 +1,89 @@
+# depslib dependency file v1.0
+1505846739 source:/home/jiggly/Documents/Research/T3_correlations/correlation_matrices.cpp
+	"correlation_matrices.hpp"
+	<iostream>
+	<thread>
+	<mutex>
+	<future>
+	<vector>
+	<complex>
+
+1504631166 /home/jiggly/Documents/Research/T3_correlations/correlation_matrices.hpp
+	"chealpix.h"
+	<stdlib.h>
+	<stdio.h>
+	<cmath>
+	<vector>
+	<complex.h>
+	<algorithm>
+	"rotAngles.hpp"
+	"Spherical.hpp"
+	"spline.hpp"
+	"eigenbasis_lin_T3.hpp"
+
+1458656898 /home/jiggly/Libraries/Healpix_3.31/src/C/subs/chealpix.h
+	<stdint.h>
+
+1497898052 /home/jiggly/Documents/Research/T3_correlations/rotAngles.hpp
+	<stdlib.h>
+	<cmath>
+	<complex.h>
+	<vector>
+	<algorithm>
+
+1497898232 /home/jiggly/Documents/Research/T3_correlations/Spherical.hpp
+	<cmath>
+	<complex>
+	<stdlib.h>
+	<vector>
+
+1495197501 /home/jiggly/Documents/Research/T3_correlations/spline.hpp
+	<cstdio>
+	<cassert>
+	<vector>
+	<algorithm>
+
+1504631359 /home/jiggly/Documents/Research/T3_correlations/eigenbasis_lin_T3.hpp
+	<stdlib.h>
+	<stdio.h>
+	<cmath>
+	<vector>
+	<complex>
+	<algorithm>
+	"Spherical.hpp"
+
+1505688727 source:/home/jiggly/Documents/Research/T3_correlations/eigenbasis_lin_T3.cpp
+	"eigenbasis_lin_T3.hpp"
+	<iostream>
+
+1505847993 source:/home/jiggly/Documents/Research/T3_correlations/main.cpp
+	<iostream>
+	<thread>
+	<mutex>
+	<future>
+	<vector>
+	<complex>
+	"correlation_matrices.hpp"
+	"eigenbasis_lin_T3.hpp"
+	"readToVec.hpp"
+
+1504909175 /home/jiggly/Documents/Research/T3_correlations/readToVec.hpp
+	<algorithm>
+	<fstream>
+	<iostream>
+	<iterator>
+	<sstream>
+	<string>
+	<vector>
+
+1504909186 source:/home/jiggly/Documents/Research/T3_correlations/readToVec.cpp
+	"readToVec.hpp"
+
+1500410528 source:/home/jiggly/Documents/Research/T3_correlations/rotAngles.cpp
+	"rotAngles.hpp"
+	<iostream>
+
+1500406219 source:/home/jiggly/Documents/Research/T3_correlations/Spherical.cpp
+	"Spherical.hpp"
+	<iostream>
+
