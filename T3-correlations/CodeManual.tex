@@ -1,0 +1,199 @@
+\documentclass[12]{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{titling}
+\usepackage{gensymb}
+\usepackage{float}
+
+\begin{document}
+
+\noindent {\bf{\Large Correlation Matrix Code Manual}} \hfill {\Large August 2017}  \\
+
+\noindent The code in question computes the mode-mode correlation matrices of the quotient spaces of the three-torus. Additionally, it will compute the pixel-pixel correlation matrix of a chosen mode-mode correlation matrix for the HEALpix pixelization scheme for the surface of a sphere. The correct implementation of this code is detailed below, along with the Python files necessary for handling/generating requisite input files and post-run plotting.
+
+\section{C++ Code}
+
+The C++ code is comprised of a set of files for handling various aspects of the computation, and they must share the same directory. \\
+
+\noindent {\bf Header Files:}
+
+\begin{verbatim}
+eigenbasis_lin_T3.hpp
+eigenbasis_sph_T3.hpp
+correlation_matrices.hpp
+readToVec.hpp
+rotAngles.hpp
+Spherical.hpp
+spline.hpp
+\end{verbatim}
+
+\noindent {\bf Source Files:}
+
+\begin{verbatim}
+eigenbasis_lin_T3.cpp
+eigenbasis_sph_T3.cpp
+correlation_matrices.cpp
+main.cpp
+readToVec.cpp
+rotAngles.cpp
+Spherical.cpp
+\end{verbatim}
+
+\noindent {\it Note: Prior to running on a machine that has access to fewer than 10 threads, the {\verb}main.cpp}} file must be edited, and the code rebuilt, in order to function properly.}\\
+
+\noindent There is also a set of {\bf .csv} files that are input into the {\bf main.cpp} file. These are:
+
+\begin{verbatim}
+angleData.csv
+lengthData.csv
+dataMask.csv
+eulerAngData.csv
+positionData.csv
+transFuncData.csv
+\end{verbatim}
+
+\subsection{HEALPix: External Library}
+
+The {\bf HEALPix} Library is available from: \\ {\bf http://healpix.sourceforge.net/downloads.php} \\
+\\
+Its installation instructions can be found at: \\{\bf http://healpix.sourceforge.net/html/install.htm}
+\\ \\
+Note that {\bf HEALPix} also depends on {\bf CFITSIO}, which is available from: \\
+{\bf  	http://heasarc.gsfc.nasa.gov/fitsio} \\ The methods for downloading and installing the {\bf CFITSIO} library are detailed in the installation instructions for {\bf HEALPix}.
+
+\subsection{GSL: External Library}
+
+The {\bf GSL} is available from: \\ {\bf https://www.gnu.org/software/gsl } \\
+\\
+Its installation instructions can be found at: \\ {\bf http://www2.lawrence.edu/fast/GREGGJ/CMSC210/gsl/gsl.html}
+
+\subsection{Running From a makefile}
+
+To use the code on a new machine, open the makefile and edit it by setting the following variables:
+\begin{enumerate}
+\item {\verb}INC_DEBUG = $(INC) -I/<filepath>/Healpix_3.31/src/C/subs}}
+
+{\verb} -I/<filepath>/ T3-correlations}}
+
+{\verb} -I/<filepath>/gsl-x.xx+dfsg/specfunc}}
+
+{\verb} -I/<filepath>/T3_correlations}}
+\item {\verb}LIB_DEBUG = $(LIB)<filepath>/Healpix_3.31/lib/libchealpix.a}}
+
+{\verb} <filepath>/libcifitsio.a <filepath>/libgsl.a}}
+
+\item {\verb}LIBDIR_DEBUG = $(LIBDIR) -L<filepath-to-libcfitsio.a>}} 
+
+{\verb}-L<filepath-to-Healpix_3.31>}} 
+
+{\verb} -L<filepath-to-libgsl.a>}}
+
+\item {\verb}INC_RELEASE = $(INC) -I/<filepath>/Healpix_3.31/src/C/subs}}
+
+{\verb} -I/<filepath>/ T3-correlations}}
+
+{\verb} -I/<filepath>/gsl-x.xx+dfsg/specfunc}}
+
+{\verb} -I/<filepath>/T3_correlations}}
+\item {\verb}LIB_RELEASE = $(LIB)<filepath>/Healpix_3.31/lib/libchealpix.a}}
+
+{\verb} <filepath>/libcifitsio.a <filepath>/libgsl.a}}
+
+\item {\verb}LIBDIR_RELEASE = $(LIBDIR) -L<filepath-to-libcfitsio.a>}} 
+
+{\verb}-L<filepath-to-Healpix_3.31>}} 
+
+{\verb} -L<filepath-to-libgsl.a>}}
+\end{enumerate}
+The {\verb}<filepath>} of each may change on different machines. It is prudent to ensure their correctness prior to running the code once the {\verb}T3_correlations}} folder and its contents are downloaded.
+
+\subsection{Output}
+
+Once the makefile variables are set, simply 
+\begin{enumerate}
+\item Run the {\bf make} command while in the {\verb} T3_correlations}} directory
+\item From the {\verb} T3_correlations/obj/Release}} directory run the following two commands:
+\subitem (A) {\verb}g++ -Wall -o T3-correlations correlation_matrices.o eigenbasis_lin_T3.o}}
+
+\indent {\verb}main.o readToVec.o rotAngles.o Spherical.o <filepath>/libcfitsio.a}}
+
+\indent {\verb}<filepath>/Healpix_3.31/lib/libchealpix.a  }}
+\subitem (B) {\verb}cp T3-correlations <filepath>/T3_correlations}}
+\item Run {\verb} ./T3-correlations}}
+\end{enumerate}
+This will create {\bf .csv} files containing the elements of the desired correlation matrix named as ``{\verb}<matrix type>}}-{\verb}<domn>-<i>-<j>-<m>-<n>-<Nmax>.csv}}"; where {\verb}<domn>}} indexes the quotient space, {\verb}<i>}} indexes the choice of three tilt angles, {\verb}<j>}} indexes the choice of three principle length scales, {\verb}<m>}} indexes the choice of three euler angles of the topology, and {\verb}<n>}} indexes the observer position within the topology. The matrix type will be {\verb}R_Cxx}} for the real part and {\verb}I_Cxx}} for the imaginary part, also {\verb}X_Cpp}}, {\verb}X_Cvv}}, and {\verb}X_Cuu}} refer to the pixel-pixel, mode-mode, and cut sky mode-mode correlation matrices respectively. These can be found in the {\verb}T3_correlations/Outputs}} folder.
+
+\subsubsection{Running in Code::Blocks IDE}
+
+Code::Blocks is an open-source IDE for C, C++, and Fortran. It is available from: \\ {\bf http://www.codeblocks.org/downloads} \\
+
+\noindent The file 
+\begin{verbatim}
+T3_correlations.cbp
+\end{verbatim} 
+must be in the same directory as the header and source files. These are already included in the project. The only additional steps to build and run the project successfully are to 
+\begin{enumerate}
+\item Make sure the ``Selected Compiler" is set to ``GNU GCC Compiler".
+\item Properly link to the HealPix and CFITSIO libraries.
+\end{enumerate}
+After installing {\bf HEALPix}, complete Step 2 by:
+\begin{enumerate}
+\item Under ``Build Options" $\rightarrow$ ``Linker Settings" $\rightarrow$ ``Link Libraries" add
+\begin{verbatim}
+<filepath>/Healpix_3.31/lib/chealpix.a
+\end{verbatim} and 
+\begin{verbatim}
+<filepath>/lib/libcifitsio.a
+\end{verbatim}
+\item Under ``Build Options" $\rightarrow$ ``Search Directories" $\rightarrow$ ``Compiler" add 
+\begin{verbatim}
+<filepath>/Healpix_3.31/src/C/subs
+\end{verbatim} and 
+\begin{verbatim}
+<filepath>/T3_correlations
+\end{verbatim}
+\item Under ``Build Options" $\rightarrow$ ``Search Directories" $\rightarrow$ ``Linker" add 
+\begin{verbatim}
+<filepath-to-libcfitsio.a>
+\end{verbatim} and 
+\begin{verbatim}
+<filepath>/Healpix_3.31/lib
+\end{verbatim}
+\end{enumerate}
+
+The output will be formatted identically to code built with the makefile, however, it may not be useful for all applications of this code to be run directly out of the Code::Blocks IDE. This method is, however, useful for testing, editing, and debugging.
+
+\section{Python Code}
+
+The elements of the computation that are not performance prohibitive (they only need to be performed once) are implemented in Python rather than C++ so that they can take advantage of Python modules and also remain simple to edit. \\
+
+\noindent There are three files needed to obtain all necessary input files for the C++ code to run. These files do not need to be run in the same directory as the C++ files, but their output files must be in that directory.
+
+\begin{enumerate}
+\item {\verb} CAMBtransferFunctions.py}} $\rightarrow$ Output: {\verb}transFuncData.csv}}
+\item {\verb}dom_params.py}} $\rightarrow$ Outputs: {\verb}angleData.csv}}, {\verb}lengthData.csv}}, {\verb}eulerAngData.csv}}, {\verb}positionData.csv}}
+\item {\verb}fits_read.py}} $\rightarrow$ Output: {\verb}dataMask.csv}}
+\end{enumerate}
+
+\noindent Additionally, to plot the ouput of the C++ code:
+
+\begin{verbatim}
+mollweide-post.py
+\end{verbatim}
+
+\subsection{Requisite Modules}
+
+Generating the C++ code inputs with the provided files requires three non-native python modules:
+\begin{enumerate}
+\item pycamb: http://camb.readthedocs.io/en/latest/
+\item healpy: https://pypi.python.org/pypi/healpy/1.8.4
+\item astropy: http://docs.astropy.org/en/stable/install.html
+\end{enumerate}
+
+\noindent {\bf pycamb} requires a Fortran90 or later fortran compiler and the CAMB software package to be installed. \\
+
+\noindent {\bf healpy} requires the {\bf HEALPix} library to be installed.
+
+\end{document}
