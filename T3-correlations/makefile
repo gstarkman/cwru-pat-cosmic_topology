@@ -13,23 +13,23 @@ LIBDIR =
 LIB = 
 LDFLAGS = 
 
-INC_DEBUG = $(INC) -I/home/jiggly/Libraries/Healpix_3.31/src/C/subs -I/home/jiggly/Documents/Research/T3_correlations
+INC_DEBUG = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations -I/home/jco35/gsl/include/gsl 
 CFLAGS_DEBUG = $(CFLAGS) -g
 RESINC_DEBUG = $(RESINC)
 RCFLAGS_DEBUG = $(RCFLAGS)
-LIBDIR_DEBUG = $(LIBDIR) -L/usr/lib -L/home/jiggly/Libraries/Healpix_3.31/lib
-LIB_DEBUG = $(LIB)/home/jiggly/Libraries/Healpix_3.31/lib/libchealpix.a /usr/lib/libcfitsio.a
+LIBDIR_DEBUG = $(LIBDIR) -L/home/jco35/Downloads/cfitsio -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/gsl/lib 
+LIB_DEBUG = $(LIB)/home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a /home/jco35/gsl/lib/libgsl.a
 LDFLAGS_DEBUG = $(LDFLAGS)
 OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
 OUT_DEBUG = bin/Debug/T3_correlations
 
-INC_RELEASE = $(INC) -I/home/jiggly/Libraries/Healpix_3.31/src/C/subs -I/home/jiggly/Documents/Research/T3_correlations
-CFLAGS_RELEASE = $(CFLAGS) -O2
-RESINC_RELEASE = $(RESINC)
-RCFLAGS_RELEASE = $(RCFLAGS)
-LIBDIR_RELEASE = $(LIBDIR) -L/usr/lib -L/home/jiggly/Libraries/Healpix_3.31/lib
-LIB_RELEASE = $(LIB)/home/jiggly/Libraries/Healpix_3.31/lib/libchealpix.a /usr/lib/libcfitsio.a 
+INC_DEBUG = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations -I/home/jco35/gsl/include/gsl 
+CFLAGS_DEBUG = $(CFLAGS) -g
+RESINC_DEBUG = $(RESINC)
+RCFLAGS_DEBUG = $(RCFLAGS)
+LIBDIR_DEBUG = $(LIBDIR) -L/home/jco35/Downloads/cfitsio -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/gsl/lib 
+LIB_DEBUG = $(LIB)/home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a /home/jco35/gsl/lib/libgsl.a
 LDFLAGS_RELEASE = $(LDFLAGS) -s
 OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
@@ -72,6 +72,9 @@ $(OBJDIR_DEBUG)/readToVec.o: readToVec.cpp
 $(OBJDIR_DEBUG)/rotAngles.o: rotAngles.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c rotAngles.cpp -o $(OBJDIR_DEBUG)/rotAngles.o
 
+$(OBJDIR_DEBUG)/T3-correlations: $(OBJ_DEBUG)
+	$(CXX) $(CFLAGS_DEBUG) -o T3-correlations $(OBJ_DEBUG) $(LIB_DEBUG)
+
 clean_debug: 
 	rm -f $(OBJ_DEBUG) $(OUT_DEBUG)
 	rm -rf bin/Debug
@@ -86,7 +89,7 @@ after_release:
 release: before_release out_release after_release
 
 out_release: before_release $(OBJ_RELEASE) $(DEP_RELEASE)
-	$(LD) $(LIBDIR_RELEASE) -o $(OUT_RELEASE) $(OBJ_RELEASE)  $(LDFLAGS_RELEASE) $(LIB_RELEASE)
+	$(LD) $(LIBDIR_RELEASE) -o $(OUT_RELEASE) $(OBJ_RELEASE) $(LDFLAGS_RELEASE) $(LIB_RELEASE)
 
 $(OBJDIR_RELEASE)/Spherical.o: Spherical.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c Spherical.cpp -o $(OBJDIR_RELEASE)/Spherical.o
@@ -106,12 +109,12 @@ $(OBJDIR_RELEASE)/readToVec.o: readToVec.cpp
 $(OBJDIR_RELEASE)/rotAngles.o: rotAngles.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c rotAngles.cpp -o $(OBJDIR_RELEASE)/rotAngles.o
 
+$(OBJDIR_RELEASE)/T3-correlations: $(OBJ_RELEASE)
+	$(CXX) $(CFLAGS_RELEASE) -o T3-correlations $(OBJ_RELEASE) $(LIB_RELEASE)
+
 clean_release: 
 	rm -f $(OBJ_RELEASE) $(OUT_RELEASE)
 	rm -rf bin/Release
 	rm -rf $(OBJDIR_RELEASE)
 
 .PHONY: before_debug after_debug clean_debug before_release after_release clean_release
-
-#run this out of /obj/Release
-
