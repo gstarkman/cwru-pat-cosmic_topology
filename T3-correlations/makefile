@@ -13,7 +13,7 @@ LIBDIR =
 LIB = 
 LDFLAGS = 
 
-INC_DEBUG = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations -I/home/jco35/gsl/include 
+INC_DEBUG = $(INC) -I/home/jco35/gsl/include -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations 
 CFLAGS_DEBUG = $(CFLAGS) -g
 RESINC_DEBUG = $(RESINC)
 RCFLAGS_DEBUG = $(RCFLAGS)
@@ -24,7 +24,7 @@ OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
 OUT_DEBUG = bin/Debug/T3_correlations
 
-INC_RELEASE = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations -I/home/jco35/gsl/include 
+INC_RELEASE = $(INC) -I/home/jco35/gsl/include -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations 
 CFLAGS_RELEASE = $(CFLAGS) -g
 RESINC_RELEASE = $(RESINC)
 RCFLAGS_RELEASE = $(RCFLAGS)
