@@ -17,8 +17,8 @@ INC_DEBUG = $(INC) -I/home/jco35/gsl/include -I/home/jco35/Downloads/Healpix_3.3
 CFLAGS_DEBUG = $(CFLAGS) -g
 RESINC_DEBUG = $(RESINC)
 RCFLAGS_DEBUG = $(RCFLAGS)
-LIBDIR_DEBUG = $(LIBDIR) -L/home/jco35/Downloads/cfitsio -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/gsl/lib 
-LIB_DEBUG = $(LIB)/home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a /home/jco35/gsl/lib/libgsl.a
+LIBDIR_DEBUG = $(LIBDIR) -L/home/jco35/gsl/lib -L/home/jco35/Downloads/cfitsio -L/home/jco35/Downloads/Healpix_3.31/lib 
+LIB_DEBUG = $(LIB)/home/jco35/gsl/lib/libgsl.a /home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a 
 LDFLAGS_DEBUG = $(LDFLAGS)
 OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
@@ -28,15 +28,15 @@ INC_RELEASE = $(INC) -I/home/jco35/gsl/include -I/home/jco35/Downloads/Healpix_3
 CFLAGS_RELEASE = $(CFLAGS) -g
 RESINC_RELEASE = $(RESINC)
 RCFLAGS_RELEASE = $(RCFLAGS)
-LIBDIR_RELEASE = $(LIBDIR) -L/home/jco35/Downloads/cfitsio -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/gsl/lib 
-LIB_RELEASE = $(LIB)/home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a /home/jco35/gsl/lib/libgsl.a
+LIBDIR_RELEASE = $(LIBDIR) -L/home/jco35/gsl/lib -L/home/jco35/Downloads/cfitsio -L/home/jco35/Downloads/Healpix_3.31/lib 
+LIB_RELEASE = $(LIB)/home/jco35/gsl/lib/libgsl.a /home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a 
 LDFLAGS_RELEASE = $(LDFLAGS) -s
 OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = bin/Release/T3_correlations
 
 OBJ_DEBUG = $(OBJDIR_DEBUG)/HPCC_Spherical.o $(OBJDIR_DEBUG)/correlation_matrices.o $(OBJDIR_DEBUG)/eigenbasis_lin_T3.o $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/readToVec.o $(OBJDIR_DEBUG)/rotAngles.o
-
+ 
 OBJ_RELEASE = $(OBJDIR_RELEASE)/HPCC_Spherical.o $(OBJDIR_RELEASE)/correlation_matrices.o $(OBJDIR_RELEASE)/eigenbasis_lin_T3.o $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/readToVec.o $(OBJDIR_RELEASE)/rotAngles.o
 
 all: debug release
