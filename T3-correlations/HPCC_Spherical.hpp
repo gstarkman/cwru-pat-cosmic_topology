@@ -4,7 +4,7 @@
 #include <complex>
 #include <stdlib.h>
 #include <vector>
-#include <gsl_specfunc.h>
+#include <gsl_sf_legendre.h>
 
 /// these are the typical mathematical functions for expansion in spherical harmonics
 double j_l(int l, double x);
