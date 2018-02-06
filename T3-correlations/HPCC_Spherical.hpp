@@ -4,6 +4,7 @@
 #include <complex>
 #include <stdlib.h>
 #include <vector>
+#include <gsl_sf_result.h>
 #include <gsl_sf_legendre.h>
 
 /// these are the typical mathematical functions for expansion in spherical harmonics
