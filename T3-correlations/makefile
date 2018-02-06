@@ -13,7 +13,7 @@ LIBDIR =
 LIB = 
 LDFLAGS = 
 
-INC_DEBUG = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations -I/home/jco35/gsl/include/gsl 
+INC_DEBUG = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations -I/home/jco35/gsl/include 
 CFLAGS_DEBUG = $(CFLAGS) -g
 RESINC_DEBUG = $(RESINC)
 RCFLAGS_DEBUG = $(RCFLAGS)
@@ -24,12 +24,12 @@ OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
 OUT_DEBUG = bin/Debug/T3_correlations
 
-INC_DEBUG = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations -I/home/jco35/gsl/include/gsl 
-CFLAGS_DEBUG = $(CFLAGS) -g
-RESINC_DEBUG = $(RESINC)
-RCFLAGS_DEBUG = $(RCFLAGS)
-LIBDIR_DEBUG = $(LIBDIR) -L/home/jco35/Downloads/cfitsio -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/gsl/lib 
-LIB_DEBUG = $(LIB)/home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a /home/jco35/gsl/lib/libgsl.a
+INC_RELEASE = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations -I/home/jco35/gsl/include 
+CFLAGS_RELEASE = $(CFLAGS) -g
+RESINC_RELEASE = $(RESINC)
+RCFLAGS_RELEASE = $(RCFLAGS)
+LIBDIR_RELEASE = $(LIBDIR) -L/home/jco35/Downloads/cfitsio -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/gsl/lib 
+LIB_RELEASE = $(LIB)/home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a /home/jco35/gsl/lib/libgsl.a
 LDFLAGS_RELEASE = $(LDFLAGS) -s
 OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
