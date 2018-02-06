@@ -35,9 +35,9 @@ OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
 OUT_RELEASE = bin/Release/T3_correlations
 
-OBJ_DEBUG = $(OBJDIR_DEBUG)/Spherical.o $(OBJDIR_DEBUG)/correlation_matrices.o $(OBJDIR_DEBUG)/eigenbasis_lin_T3.o $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/readToVec.o $(OBJDIR_DEBUG)/rotAngles.o
+OBJ_DEBUG = $(OBJDIR_DEBUG)/HPCC_Spherical.o $(OBJDIR_DEBUG)/correlation_matrices.o $(OBJDIR_DEBUG)/eigenbasis_lin_T3.o $(OBJDIR_DEBUG)/main.o $(OBJDIR_DEBUG)/readToVec.o $(OBJDIR_DEBUG)/rotAngles.o
 
-OBJ_RELEASE = $(OBJDIR_RELEASE)/Spherical.o $(OBJDIR_RELEASE)/correlation_matrices.o $(OBJDIR_RELEASE)/eigenbasis_lin_T3.o $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/readToVec.o $(OBJDIR_RELEASE)/rotAngles.o
+OBJ_RELEASE = $(OBJDIR_RELEASE)/HPCC_Spherical.o $(OBJDIR_RELEASE)/correlation_matrices.o $(OBJDIR_RELEASE)/eigenbasis_lin_T3.o $(OBJDIR_RELEASE)/main.o $(OBJDIR_RELEASE)/readToVec.o $(OBJDIR_RELEASE)/rotAngles.o
 
 all: debug release
 
@@ -54,8 +54,8 @@ debug: before_debug out_debug after_debug
 out_debug: before_debug $(OBJ_DEBUG) $(DEP_DEBUG)
 	$(LD) $(LIBDIR_DEBUG) -o $(OUT_DEBUG) $(OBJ_DEBUG)  $(LDFLAGS_DEBUG) $(LIB_DEBUG)
 
-$(OBJDIR_DEBUG)/Spherical.o: Spherical.cpp
-	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c Spherical.cpp -o $(OBJDIR_DEBUG)/Spherical.o
+$(OBJDIR_DEBUG)/HPCC_Spherical.o: HPCC_Spherical.cpp
+	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c HPCC_Spherical.cpp -o $(OBJDIR_DEBUG)/HPCC_Spherical.o
 
 $(OBJDIR_DEBUG)/correlation_matrices.o: correlation_matrices.cpp
 	$(CXX) $(CFLAGS_DEBUG) $(INC_DEBUG) -c correlation_matrices.cpp -o $(OBJDIR_DEBUG)/correlation_matrices.o
@@ -91,8 +91,8 @@ release: before_release out_release after_release
 out_release: before_release $(OBJ_RELEASE) $(DEP_RELEASE)
 	$(LD) $(LIBDIR_RELEASE) -o $(OUT_RELEASE) $(OBJ_RELEASE) $(LDFLAGS_RELEASE) $(LIB_RELEASE)
 
-$(OBJDIR_RELEASE)/Spherical.o: Spherical.cpp
-	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c Spherical.cpp -o $(OBJDIR_RELEASE)/Spherical.o
+$(OBJDIR_RELEASE)/HPCC_Spherical.o: HPCC_Spherical.cpp
+	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c HPCC_Spherical.cpp -o $(OBJDIR_RELEASE)/HPCC_Spherical.o
 
 $(OBJDIR_RELEASE)/correlation_matrices.o: correlation_matrices.cpp
 	$(CXX) $(CFLAGS_RELEASE) $(INC_RELEASE) -c correlation_matrices.cpp -o $(OBJDIR_RELEASE)/correlation_matrices.o
