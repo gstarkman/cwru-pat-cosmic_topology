@@ -11,25 +11,25 @@ CFLAGS = -std=gnu++11 -Wall
 RESINC = 
 LIBDIR = 
 LIB = 
-LDFLAGS = -lcfitsio -lcurl
+LDFLAGS = -lcurl -lpthread -lbz2
 
-INC_DEBUG = $(INC) -I/home/jco35/gsl/include -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/code/cwru-pat-cosmic_topology/T3-correlations 
+INC_DEBUG = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/.usr/local/cfitsio/3.420/include -I/home/jco35/gsl/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations 
 CFLAGS_DEBUG = $(CFLAGS) -g
 RESINC_DEBUG = $(RESINC)
 RCFLAGS_DEBUG = $(RCFLAGS)
-LIBDIR_DEBUG = $(LIBDIR) -L/home/jco35/gsl/lib -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/Downloads/cfitsio/lib
-LIB_DEBUG = $(LIB)/home/jco35/gsl/lib/libgsl.a /home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a
+LIBDIR_DEBUG = $(LIBDIR) -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/.usr/local/cfitsio/3.420/lib -L/home/jco35/gsl/lib 
+LIB_DEBUG = $(LIB)/home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a $(LIB)/home/jco35/.usr/local/cfitsio/3.420/lib/libcfitsio.a $(LIB)/home/jco35/gsl/lib/libgsl.a
 LDFLAGS_DEBUG = $(LDFLAGS)
 OBJDIR_DEBUG = obj/Debug
 DEP_DEBUG = 
 OUT_DEBUG = bin/Debug/T3_correlations
 
-INC_RELEASE = $(INC) -I/home/jco35/gsl/include -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/code/cwru-pat-cosmic_topology/T3-correlations 
+INC_RELEASE = $(INC) -I/home/jco35/Downloads/Healpix_3.31/include -I/home/jco35/.usr/local/cfitsio/3.420/include -I/home/jco35/gsl/include -I/home/jco35/cwru-pat-cosmic_topology/T3-correlations
 CFLAGS_RELEASE = $(CFLAGS) -g
 RESINC_RELEASE = $(RESINC)
 RCFLAGS_RELEASE = $(RCFLAGS)
-LIBDIR_RELEASE = $(LIBDIR) -L/home/jco35/gsl/lib -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/Downloads/cfitsio/lib
-LIB_RELEASE = $(LIB)/home/jco35/gsl/lib/libgsl.a /home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/Downloads/cfitsio/libcfitsio.a
+LIBDIR_RELEASE = $(LIBDIR) -L/home/jco35/Downloads/Healpix_3.31/lib -L/home/jco35/.usr/local/cfitsio/3.420/lib -L/home/jco35/gsl/lib 
+LIB_RELEASE = $(LIB)/home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a $(LIB)/home/jco35/.usr/local/cfitsio/3.420/lib/libcfitsio.a $(LIB)/home/jco35/gsl/lib/libgsl.a 
 LDFLAGS_RELEASE = $(LDFLAGS) -s
 OBJDIR_RELEASE = obj/Release
 DEP_RELEASE = 
@@ -118,3 +118,7 @@ clean_release:
 	rm -rf $(OBJDIR_RELEASE)
 
 .PHONY: before_debug after_debug clean_debug before_release after_release clean_release
+
+
+	g++ -Wall -o T3-correlations correlation_matrices.o eigenbasis_lin_T3.o main.o readToVec.o rotAngles.o HPCC_Spherical.o /home/jco35/Downloads/Healpix_3.31/lib/libchealpix.a /home/jco35/.usr/local/cfitsio/3.420/lib/libcfitsio.a /home/jco35/gsl/lib/libgsl.a -lcurl
+
